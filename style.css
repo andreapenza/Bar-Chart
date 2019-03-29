@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+}
+body{
+    background-image:linear-gradient(to right,#7efe47,#0099ff,#7300e6);
+    font-family: 'Do Hyeon', sans-serif;
+    text-align:center;
+}
+h1{ 
+    margin:15px;
+}
+.svg-container{
+    position:relative;
+    width:850px;
+    height:550px;
+    background-color:white;
+    margin:auto;
+    box-shadow:3px 3px 5px black,-3px 3px 5px black,3px -3px 5px black,-3px -3px 5px black;
+}
+.tooltip{
+    position:absolute;
+    width:200px;
+    height:75px;
+    font-size:20px;
+    padding:12px;
+    background-image:linear-gradient(to right,#7efe47,#7efe47,#0099ff,#0099ff,#7300e6);
+    opacity:0.9;
+    border-radius:5px;
+    box-shadow:2px 2px 5px black,-2px 2px 5px black, 2px -2px 5px black, -2px -2px 5px black;
+    pointer-events:none;
+}
+
