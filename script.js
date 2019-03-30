@@ -1,15 +1,23 @@
-const w = 850, h = 550, padding = 50;
 
-//create svg element
-const svg = d3.select(".svg-container")
+ const container = document.getElementsByClassName("svg-container")[0];
+ container.style.width = window.innerWidth - 50+ "px";
+ container.style.height = window.innerHeight - 100 +"px";
+
+var w = container.clientWidth, h = container.clientHeight, padding = 50;
+
+
+d3.json("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json").then(function(dataset){
+   DrawBar(dataset)});
+
+
+function DrawBar(dataset){
+   //create svg element
+   const svg = d3.select(".svg-container")
               .append("svg")
               .attr("width", w)
-              .attr("height",h);
+              .attr("height",h)
 
-//fetch json file, if succeed then create chart
-d3.json("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json").then(function(dataset){
-
-    //create scaling constants
+   //create scaling constants
     const xScale = d3.scaleTime()
                    .domain([new Date(dataset.from_date), new Date(dataset.to_date)])
                    .range([padding, w - padding])
@@ -38,8 +46,8 @@ d3.json("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
        .text('GDP');
 
     svg.append('text')
-       .attr('x', 770)
-       .attr('y', 535)
+       .attr('x', w -75)
+       .attr('y', h -15)
        .text('Timeline');
 
     // color scale
@@ -62,29 +70,30 @@ d3.json("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/mas
        .attr("fill", d => colorScale(d[1]))
        .on("mouseover", function(d){
            d3.select(this)
-             .attr("fill","rgba(0,0,0,0.8")
-            
+             .attr("fill","rgba(0,0,0,0.8")            
            d3.select(".svg-container").append("div")
              .attr("id", "tooltip")
              .attr("class","tooltip")
              .attr("data-date",d[0])
              .attr("data-gdp", d[1])
-             .style("left", "325px")
-             .style("top", "50px")
-             .html("<p>"+d[0] + "<br/>$ " + d[1] + " Billions")
-             
+             .style("left", w/2-90+"px" )
+             .style("top", "20px")
+             .html("<p>"+d[0] + "<br/>$ " + d[1] + " Billions")            
       })
        .on("mouseleave", function (d){
-           d3.select(this).attr("fill", colorScale(d[1]) );
-            
+           d3.select(this).attr("fill", colorScale(d[1]) ); 
            d3.select(".svg-container")
               .select("div")
               .remove()
-
-       }) 
-
-
-})
-
+       })     
+       window.onresize = function(){
+         container.style.width = window.innerWidth -50 + "px";
+         container.style.height = window.innerHeight - 100 +"px";
+         w = container.clientWidth;
+         h = container.clientHeight;
+         d3.select("svg").remove();
+         DrawBar(dataset,w,h);
+       }  
+};
 
 
