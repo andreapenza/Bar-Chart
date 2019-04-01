@@ -17,11 +17,13 @@ h1{
     background-color:white;
     margin:2% auto;
     box-shadow:3px 3px 5px black,-3px 3px 5px black,3px -3px 5px black,-3px -3px 5px black;
+    min-width:630px;
+    min-height:325px;
 }
 .tooltip{
     position:absolute;
     width:180px;
-    height:75px;
+    height:auto;
     font-size:20px;
     padding:12px;
     background-image:linear-gradient(to right,#7efe47,#7efe47,#0099ff,#0099ff,#7300e6);
@@ -30,4 +32,7 @@ h1{
     box-shadow:2px 2px 5px black,-2px 2px 5px black, 2px -2px 5px black, -2px -2px 5px black;
     pointer-events:none;
 }
-
+a{
+    text-decoration:none;
+    color:blue;
+}
